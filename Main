@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+public class Main {
+    public static String processValue(Object value) {
+        // TODO: Использовать сопоставление шаблонов с instanceof для обработки значения
+        // Если это Integer: вернуть "Number: " + (value * 2)
+        // Если это String: вернуть "Text: " + value.toUpperCase()
+        // Если это Boolean: вернуть "Boolean: " + (!value)
+        // Для любого другого типа: вернуть "Unknown"
+        
+        if (value instanceof Integer num) {
+            return "Number: " + (num * 2);
+        } else if (value instanceof String str) {
+            return "Text: " + str.toUpperCase();
+        } else if (value instanceof Boolean bool) {
+            return "Boolean: " + !bool;
+        } else {
+            return "Unknown";
+        }
+    }
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String type = scanner.nextLine();
+        String inputValue = scanner.nextLine();
+        
+        Object value = switch(type) {
+            case "Integer" -> Integer.parseInt(inputValue);
+            case "String" -> inputValue;
+            case "Boolean" -> Boolean.parseBoolean(inputValue);
+            default -> inputValue;
+        };
+        
+        System.out.println(processValue(value));
+    }
+}
